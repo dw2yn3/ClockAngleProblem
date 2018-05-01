@@ -21,46 +21,24 @@ using System;
 
 namespace ClockAngleProblem
 {
-    class Program
+    class ClockAngles
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine(Calculate(2300));
-            Console.WriteLine(Calculate(0300));
-            Console.WriteLine(Calculate(2015));
-            Console.WriteLine(Calculate(5000));
-            Console.WriteLine(Calculate(0000));
-            Console.WriteLine(Calculate(2359));
-            Console.WriteLine(Calculate(1201));
-            Console.ReadLine();
-        }
-
         public static int Calculate(int time)
         {
             /*
              * angle holds angle calculated from time;
-             * hour holds hour part of the time;
-             * minute holds minute part of the time;
              * angleFromHourHand holds angle made by hour hand with 0000 baseline.
              * angleFromMinuteHand holds angle made by minute hand with 0000 baseline.
             */            
-            int angle, hour, minute, angleFromHourHand, angleFromMinuteHand;
+            int angle, angleFromHourHand, angleFromMinuteHand;
 
-            //check for corners, where time is midnight or noon.
-            if (time == 0000 || time == 1200)
-            {
-                return 0;
-            }
-            else if (time > 1200)
+            if (time > 1200)
             {
                 time = time - 1200;
-            }
+            }           
 
-            hour = time / 100;
-            minute = time - (hour * 100);
-
-            angleFromHourHand = hour * 30;
-            angleFromMinuteHand = minute * 6;
+            angleFromHourHand = time / 100 * 30;
+            angleFromMinuteHand = (time  % 100) * 6;
 
             /**Calculate angle by subtracting the angle made by hour hand from the minute hand
              * ensure to take the absolute value, so the angle is always delivered as a pisitive value */
